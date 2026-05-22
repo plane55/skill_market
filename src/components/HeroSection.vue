@@ -1,0 +1,81 @@
+<script setup>
+const stats = [
+  { label: '技能总数', value: '1,280+' },
+  { label: '在学学员', value: '50,000+' },
+  { label: '认证导师', value: '860+' },
+  { label: '课程好评率', value: '98%' },
+]
+</script>
+
+<template>
+  <section class="relative pt-28 sm:pt-36 pb-16 sm:pb-20 overflow-hidden">
+    <!-- Decorative background -->
+    <div class="absolute inset-0 -z-10">
+      <div class="absolute -top-40 -right-40 w-[500px] h-[500px] bg-purple-200/40 rounded-full mix-blend-multiply blur-3xl"></div>
+      <div class="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-indigo-200/40 rounded-full mix-blend-multiply blur-3xl"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-sky-100/30 rounded-full mix-blend-multiply blur-3xl"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-4xl mx-auto">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 border border-indigo-100/60 text-sm text-indigo-600 font-medium mb-6 shadow-sm animate-fade-in">
+          <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+          已汇聚 1,280+ 个精品技能
+        </div>
+
+        <!-- Heading -->
+        <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight leading-tight mb-6 animate-slide-up">
+          发现属于你的
+          <span class="gradient-text">下一个技能</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-base sm:text-lg lg:text-xl text-slate-500 max-w-2xl mx-auto mb-8 leading-relaxed animate-slide-up animate-delay-100">
+          从 AI 大模型到产品设计，从编程开发到个人成长 —
+          <br class="hidden sm:block" />
+          汇聚各领域专家的实战技能课程，助你快速进阶。
+        </p>
+
+        <!-- Search bar -->
+        <div class="max-w-xl mx-auto mb-10 animate-slide-up animate-delay-200">
+          <div class="relative">
+            <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+              <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <input
+              type="text"
+              placeholder="搜索你感兴趣的技能..."
+              class="w-full pl-12 pr-4 py-3.5 bg-white/80 border border-slate-200/80 rounded-2xl text-sm text-slate-700 placeholder-slate-400 shadow-sm backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-indigo-400/40 focus:border-indigo-300 transition-all duration-300"
+            />
+          </div>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="flex items-center justify-center gap-4 animate-slide-up animate-delay-300">
+          <button class="px-7 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full hover:shadow-xl hover:shadow-indigo-200/50 transition-all duration-300 hover:scale-105 active:scale-95">
+            探索全部技能
+            <span class="inline-block ml-1.5">→</span>
+          </button>
+          <button class="px-7 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-semibold text-slate-600 bg-white/80 border border-slate-200/80 rounded-full hover:border-indigo-200 hover:text-indigo-600 hover:shadow-md transition-all duration-300 backdrop-blur-sm">
+            成为导师
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="mt-16 sm:mt-20 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 max-w-3xl mx-auto animate-fade-in animate-delay-500">
+        <div
+          v-for="stat in stats"
+          :key="stat.label"
+          class="relative text-center py-4 px-2"
+        >
+          <div class="text-2xl sm:text-3xl font-bold text-slate-800">{{ stat.value }}</div>
+          <div class="text-xs sm:text-sm text-slate-400 mt-1">{{ stat.label }}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
