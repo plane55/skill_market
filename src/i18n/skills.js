@@ -7,7 +7,7 @@ export const skills = [
     category: 'ai', difficulty: 2,
     rating: 4.9, reviewCount: 356,
     author: { name: { zh: '陈思远', en: 'Siyuan Chen' }, avatar: '陈', color: 'bg-indigo-500' },
-    enrolledCount: 2840, icon: '🤖', featured: true,
+    enrolledCount: 2840
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ export const skills = [
     category: 'ai', difficulty: 3,
     rating: 4.7, reviewCount: 189,
     author: { name: { zh: '林伟', en: 'Wei Lin' }, avatar: '林', color: 'bg-violet-500' },
-    enrolledCount: 1560, icon: '⚡', featured: false,
+    enrolledCount: 1560
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ export const skills = [
     category: 'ai', difficulty: 3,
     rating: 4.8, reviewCount: 124,
     author: { name: { zh: '张睿', en: 'Rui Zhang' }, avatar: '张', color: 'bg-purple-600' },
-    enrolledCount: 980, icon: '🧠', featured: false,
+    enrolledCount: 980
   },
   {
     id: 4,
@@ -37,7 +37,7 @@ export const skills = [
     category: 'programming', difficulty: 2,
     rating: 4.8, reviewCount: 267,
     author: { name: { zh: '李明', en: 'Ming Li' }, avatar: '李', color: 'bg-blue-500' },
-    enrolledCount: 2100, icon: '⚛️', featured: true,
+    enrolledCount: 2100
   },
   {
     id: 5,
@@ -47,7 +47,7 @@ export const skills = [
     category: 'programming', difficulty: 3,
     rating: 4.9, reviewCount: 198,
     author: { name: { zh: '王川', en: 'Chuan Wang' }, avatar: '王', color: 'bg-rose-500' },
-    enrolledCount: 1340, icon: '🦀', featured: false,
+    enrolledCount: 1340
   },
   {
     id: 6,
@@ -57,7 +57,7 @@ export const skills = [
     category: 'programming', difficulty: 2,
     rating: 4.6, reviewCount: 145,
     author: { name: { zh: '赵宇', en: 'Yu Zhao' }, avatar: '赵', color: 'bg-cyan-500' },
-    enrolledCount: 1120, icon: '🔧', featured: false,
+    enrolledCount: 1120
   },
   {
     id: 7,
@@ -67,7 +67,7 @@ export const skills = [
     category: 'programming', difficulty: 1,
     rating: 4.6, reviewCount: 423,
     author: { name: { zh: '刘芳', en: 'Fang Liu' }, avatar: '刘', color: 'bg-yellow-500' },
-    enrolledCount: 3200, icon: '🐍', featured: false,
+    enrolledCount: 3200
   },
   {
     id: 8,
@@ -77,7 +77,7 @@ export const skills = [
     category: 'design', difficulty: 2,
     rating: 4.7, reviewCount: 234,
     author: { name: { zh: '周敏', en: 'Min Zhou' }, avatar: '周', color: 'bg-pink-500' },
-    enrolledCount: 1890, icon: '🎨', featured: true,
+    enrolledCount: 1890
   },
   {
     id: 9,
@@ -87,7 +87,7 @@ export const skills = [
     category: 'design', difficulty: 2,
     rating: 4.6, reviewCount: 156,
     author: { name: { zh: '孙悦', en: 'Yue Sun' }, avatar: '孙', color: 'bg-orange-500' },
-    enrolledCount: 920, icon: '✨', featured: false,
+    enrolledCount: 920
   },
   {
     id: 10,
@@ -97,7 +97,7 @@ export const skills = [
     category: 'design', difficulty: 1,
     rating: 4.4, reviewCount: 112,
     author: { name: { zh: '吴桐', en: 'Tong Wu' }, avatar: '吴', color: 'bg-indigo-400' },
-    enrolledCount: 780, icon: '🔍', featured: false,
+    enrolledCount: 780
   },
   {
     id: 11,
@@ -107,7 +107,7 @@ export const skills = [
     category: 'writing', difficulty: 1,
     rating: 4.5, reviewCount: 167,
     author: { name: { zh: '郑文', en: 'Wen Zheng' }, avatar: '郑', color: 'bg-amber-500' },
-    enrolledCount: 1150, icon: '📝', featured: false,
+    enrolledCount: 1150
   },
   {
     id: 12,
@@ -117,7 +117,7 @@ export const skills = [
     category: 'writing', difficulty: 2,
     rating: 4.7, reviewCount: 234,
     author: { name: { zh: '钱思', en: 'Si Qian' }, avatar: '钱', color: 'bg-red-500' },
-    enrolledCount: 2100, icon: '💰', featured: true,
+    enrolledCount: 2100
   },
   {
     id: 13,
@@ -127,7 +127,7 @@ export const skills = [
     category: 'writing', difficulty: 1,
     rating: 4.3, reviewCount: 89,
     author: { name: { zh: '何晴', en: 'Qing He' }, avatar: '何', color: 'bg-emerald-500' },
-    enrolledCount: 650, icon: '📖', featured: false,
+    enrolledCount: 650
   },
   {
     id: 14,
@@ -137,7 +137,7 @@ export const skills = [
     category: 'marketing', difficulty: 2,
     rating: 4.7, reviewCount: 198,
     author: { name: { zh: '黄磊', en: 'Lei Huang' }, avatar: '黄', color: 'bg-green-600' },
-    enrolledCount: 1560, icon: '📈', featured: true,
+    enrolledCount: 1560
   },
   {
     id: 15,
@@ -147,7 +147,7 @@ export const skills = [
     category: 'marketing', difficulty: 2,
     rating: 4.5, reviewCount: 134,
     author: { name: { zh: '曹阳', en: 'Yang Cao' }, avatar: '曹', color: 'bg-teal-500' },
-    enrolledCount: 980, icon: '🔍', featured: false,
+    enrolledCount: 980
   },
   {
     id: 16,
@@ -157,7 +157,7 @@ export const skills = [
     category: 'marketing', difficulty: 1,
     rating: 4.4, reviewCount: 213,
     author: { name: { zh: '许婷', en: 'Ting Xu' }, avatar: '许', color: 'bg-sky-500' },
-    enrolledCount: 1870, icon: '📱', featured: false,
+    enrolledCount: 1870
   },
   {
     id: 17,
@@ -167,7 +167,7 @@ export const skills = [
     category: 'management', difficulty: 2,
     rating: 4.6, reviewCount: 87,
     author: { name: { zh: '高远', en: 'Yuan Gao' }, avatar: '高', color: 'bg-gray-600' },
-    enrolledCount: 540, icon: '👥', featured: false,
+    enrolledCount: 540
   },
   {
     id: 18,
@@ -177,7 +177,7 @@ export const skills = [
     category: 'management', difficulty: 3,
     rating: 4.8, reviewCount: 156,
     author: { name: { zh: '唐宁', en: 'Ning Tang' }, avatar: '唐', color: 'bg-slate-700' },
-    enrolledCount: 1230, icon: '🎯', featured: true,
+    enrolledCount: 1230
   },
   {
     id: 19,
@@ -187,7 +187,7 @@ export const skills = [
     category: 'data', difficulty: 1,
     rating: 4.7, reviewCount: 345,
     author: { name: { zh: '程雪', en: 'Xue Cheng' }, avatar: '程', color: 'bg-lime-500' },
-    enrolledCount: 2800, icon: '🗄️', featured: false,
+    enrolledCount: 2800
   },
   {
     id: 20,
@@ -197,7 +197,7 @@ export const skills = [
     category: 'data', difficulty: 2,
     rating: 4.5, reviewCount: 98,
     author: { name: { zh: '沈涛', en: 'Tao Shen' }, avatar: '沈', color: 'bg-cyan-600' },
-    enrolledCount: 720, icon: '📋', featured: false,
+    enrolledCount: 720
   },
   {
     id: 21,
@@ -207,7 +207,7 @@ export const skills = [
     category: 'language', difficulty: 1,
     rating: 4.4, reviewCount: 312,
     author: { name: { zh: '杨琳', en: 'Lin Yang' }, avatar: '杨', color: 'bg-blue-400' },
-    enrolledCount: 2600, icon: '🌍', featured: false,
+    enrolledCount: 2600
   },
   {
     id: 22,
@@ -217,7 +217,7 @@ export const skills = [
     category: 'language', difficulty: 1,
     rating: 4.6, reviewCount: 178,
     author: { name: { zh: '渡边优', en: 'Yu Watanabe' }, avatar: '渡', color: 'bg-red-400' },
-    enrolledCount: 1450, icon: '🗾', featured: false,
+    enrolledCount: 1450
   },
   {
     id: 23,
@@ -227,7 +227,7 @@ export const skills = [
     category: 'growth', difficulty: 1,
     rating: 4.3, reviewCount: 567,
     author: { name: { zh: '范琦', en: 'Qi Fan' }, avatar: '范', color: 'bg-amber-400' },
-    enrolledCount: 4500, icon: '⏰', featured: false,
+    enrolledCount: 4500
   },
   {
     id: 24,
@@ -237,7 +237,7 @@ export const skills = [
     category: 'growth', difficulty: 1,
     rating: 4.5, reviewCount: 203,
     author: { name: { zh: '彭飞', en: 'Fei Peng' }, avatar: '彭', color: 'bg-orange-400' },
-    enrolledCount: 1680, icon: '🎤', featured: false,
+    enrolledCount: 1680
   },
 ]
 

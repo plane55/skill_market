@@ -30,7 +30,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
           <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-lg font-bold shadow-lg shadow-indigo-200">
             S
           </div>
-          <span class="text-xl font-bold gradient-text hidden sm:block">SkillMarket</span>
+          <span class="text-xl font-bold gradient-text hidden sm:block">Skill市场</span>
         </div>
 
         <!-- Nav Links -->

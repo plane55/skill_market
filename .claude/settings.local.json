@@ -3,7 +3,20 @@
     "allow": [
       "Bash(git -C \"e:/webproject/skill_market\" show 9b368d4 --stat)",
       "Bash(git -C \"e:/webproject/skill_market\" diff 8d7e981..759091a --stat)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(mkdir -p \"e:/webproject/skill_market/src/pages/\\\\[locale\\\\]/skills\" && rm -rf \"e:/webproject/skill_market/src/pages/en\" && rm -f \"e:/webproject/skill_market/src/pages/index.astro\" && rm -rf \"e:/webproject/skill_market/src/pages/skills\")",
+      "Bash(rm -rf \"e:/webproject/skill_market/src/pages/[locale\" && ls \"e:/webproject/skill_market/src/pages/\")",
+      "Bash(node -e \"const s = require\\('./src/i18n/skills.js'\\)\")",
+      "Bash(node --input-type=module -e \"import { skills } from './src/i18n/skills.js'; console.log\\(skills.length, 'skills, first:', skills[0].name.zh\\)\")",
+      "Bash(sed -i 's/from-blue-600 to-blue-600/from-blue-600 to-blue-800/g' src/pages/\\\\[locale\\\\]/index.astro)",
+      "Bash(sed -i 's/from-blue-600 to-blue-600/from-blue-600 to-blue-800/g' src/components/CategoryNav.astro)",
+      "Bash(sed -i 's/from-blue-600 to-blue-600/from-blue-600 to-blue-800/g' src/components/NavBar.astro)",
+      "Bash(sed -i 's/from-blue-500 to-blue-600/from-blue-500 to-blue-700/g' src/components/NavBar.astro)",
+      "Bash(sed -i 's/from-blue-500 to-blue-600/from-blue-500 to-blue-700/g' src/components/FooterSection.astro)"
+    ],
+    "additionalDirectories": [
+      "e:\\webproject\\skill_market\\src\\pages\\[locale\\]",
+      "e:\\webproject\\skill_market\\src\\pages\\[locale"
     ]
   }
 }

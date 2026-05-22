@@ -1,8 +1,8 @@
 export const ui = {
   zh: {
-    'site.title': 'SkillMarket — 发现属于你的下一个技能',
-    'site.description': 'SkillMarket 汇聚 AI/大模型、编程开发、UI/UX 设计、内容创作、市场营销等各领域精品技能。发现属于你的下一个技能，快速进阶。',
-    'site.keywords': '技能学习,在线课程,AI教程,编程学习,设计课程,自我提升,职业技能,SkillMarket',
+    'site.title': 'Skill市场 — 发现属于你的下一个技能',
+    'site.description': 'Skill市场 汇聚 AI/大模型、编程开发、UI/UX 设计、内容创作、市场营销等各领域精品技能。发现属于你的下一个技能，快速进阶。',
+    'site.keywords': '技能学习,在线课程,AI教程,编程学习,设计课程,自我提升,职业技能,SkillMarket,Skill市场',
     'site.og.description': '汇聚各领域专家的实战技能，助你快速进阶。',
     'nav.discover': '发现技能',
     'nav.about': '关于我们',
@@ -48,7 +48,7 @@ export const ui = {
     'footer.privacy': '隐私政策',
     'footer.terms': '服务条款',
     'footer.help': '帮助中心',
-    'footer.copyright': '© 2026 SkillMarket. All rights reserved.',
+    'footer.copyright': '© 2026 Skill市场. All rights reserved.',
   },
   en: {
     'site.title': 'SkillMarket — Discover Your Next Skill',
@@ -108,16 +108,16 @@ export function t(locale, key) {
 }
 
 export const categories = [
-  { id: 'all', name: { zh: '全部', en: 'All' }, icon: '🎯' },
-  { id: 'ai', name: { zh: 'AI / 大模型', en: 'AI / LLM' }, icon: '🤖' },
-  { id: 'programming', name: { zh: '编程开发', en: 'Programming' }, icon: '💻' },
-  { id: 'design', name: { zh: 'UI/UX 设计', en: 'UI/UX Design' }, icon: '🎨' },
-  { id: 'writing', name: { zh: '内容创作', en: 'Content Creation' }, icon: '✍️' },
-  { id: 'marketing', name: { zh: '市场营销', en: 'Marketing' }, icon: '📈' },
-  { id: 'management', name: { zh: '管理', en: 'Management' }, icon: '👥' },
-  { id: 'data', name: { zh: '数据分析', en: 'Data Analysis' }, icon: '📊' },
-  { id: 'language', name: { zh: '语言学习', en: 'Language' }, icon: '🌍' },
-  { id: 'growth', name: { zh: '个人成长', en: 'Personal Growth' }, icon: '🌱' },
+  { id: 'all', name: { zh: '全部', en: 'All' } },
+  { id: 'ai', name: { zh: 'AI / 大模型', en: 'AI / LLM' } },
+  { id: 'programming', name: { zh: '编程开发', en: 'Programming' } },
+  { id: 'design', name: { zh: 'UI/UX 设计', en: 'UI/UX Design' } },
+  { id: 'writing', name: { zh: '内容创作', en: 'Content Creation' } },
+  { id: 'marketing', name: { zh: '市场营销', en: 'Marketing' } },
+  { id: 'management', name: { zh: '管理', en: 'Management' } },
+  { id: 'data', name: { zh: '数据分析', en: 'Data Analysis' } },
+  { id: 'language', name: { zh: '语言学习', en: 'Language' } },
+  { id: 'growth', name: { zh: '个人成长', en: 'Personal Growth' } },
 ]
 
 export function getCategories(locale) {

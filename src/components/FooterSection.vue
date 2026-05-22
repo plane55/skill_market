@@ -10,7 +10,7 @@ import { categories } from '../data/skills'
         <div class="col-span-2 sm:col-span-1">
           <div class="flex items-center gap-2.5 mb-4">
             <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-sm font-bold">S</div>
-            <span class="text-lg font-bold text-white">SkillMarket</span>
+            <span class="text-lg font-bold text-white">Skill市场</span>
           </div>
           <p class="text-sm leading-relaxed text-slate-500">
             汇聚各领域专家的实战技能课程，<br />助你发现属于你的下一个技能。

@@ -1,25 +1,23 @@
 ---
 const { locale = 'zh' } = Astro.props
 const isEn = locale === 'en'
+const brand = isEn ? 'SkillMarket' : 'Skill市场'
 ---
 
 <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent" id="navbar">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16 sm:h-20">
-      <a href={isEn ? '/en' : '/'} class="flex items-center gap-2.5">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-lg font-bold shadow-lg shadow-indigo-200">S</div>
-        <span class="text-xl font-bold gradient-text hidden sm:block">SkillMarket</span>
+      <a href={`/${locale}`} class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-lg font-bold shadow-lg shadow-blue-200">S</div>
+        <span class="text-xl font-bold gradient-text hidden sm:block">{brand}</span>
       </a>
       <div class="flex items-center gap-3 sm:gap-4">
         <a
-          href={isEn ? '/' : '/en'}
-          class="text-xs sm:text-sm font-medium text-slate-500 hover:text-indigo-600 transition-colors px-2 py-1"
+          href={`/${isEn ? 'zh' : 'en'}`}
+          class="text-xs sm:text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors px-2 py-1"
         >
           {isEn ? '中文' : 'English'}
         </a>
-        <button class="px-4 sm:px-5 py-2 sm:py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full hover:shadow-lg hover:shadow-indigo-200/50 transition-all duration-300 hover:scale-105 active:scale-95">
-          {isEn ? 'Explore' : '开始探索'}
-        </button>
       </div>
     </div>
   </div>

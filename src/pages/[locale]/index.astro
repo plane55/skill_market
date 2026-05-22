@@ -1,0 +1,218 @@
+---
+import '../../styles/global.css'
+import NavBar from '../../components/NavBar.astro'
+import CategoryNav from '../../components/CategoryNav.astro'
+import SkillCard from '../../components/SkillCard.astro'
+import FooterSection from '../../components/FooterSection.astro'
+import { getSkills } from '../../i18n/skills'
+import { getCategories } from '../../i18n/ui'
+
+export function getStaticPaths() {
+  return [
+    { params: { locale: 'zh' } },
+    { params: { locale: 'en' } },
+  ]
+}
+
+const { locale } = Astro.params
+const skills = getSkills(locale)
+const categories = getCategories(locale)
+const isEn = locale === 'en'
+
+const meta = {
+  title: isEn ? 'SkillMarket — Discover Your Next Skill' : 'Skill市场 — 发现属于你的下一个技能',
+  description: isEn
+    ? 'SkillMarket brings together premium skills across AI/LLM, programming, design, marketing, and more.'
+    : 'Skill市场 汇聚 AI/大模型、编程开发、UI/UX 设计、内容创作、市场营销等各领域精品技能。',
+  og: isEn
+    ? 'Premium skills from industry experts to accelerate your career growth.'
+    : '汇聚各领域专家的实战技能，助你快速进阶。',
+}
+
+const filterLabels = isEn ? {
+  all: 'All Skills',
+  courses: 'skills',
+  ai: 'AI / LLM Skills', programming: 'Programming Skills', design: 'UI/UX Design Skills',
+  writing: 'Content Creation Skills', marketing: 'Marketing Skills', management: 'Management Skills',
+  data: 'Data Analysis Skills', language: 'Language Learning Skills', growth: 'Personal Growth Skills',
+} : {
+  all: '全部技能',
+  courses: '个技能',
+  ai: 'AI / 大模型 技能', programming: '编程开发 技能', design: 'UI/UX 设计 技能',
+  writing: '内容创作 技能', marketing: '市场营销 技能', management: '管理 技能',
+  data: '数据分析 技能', language: '语言学习 技能', growth: '个人成长 技能',
+}
+---
+
+<!DOCTYPE html>
+<html lang={isEn ? 'en' : 'zh-CN'}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{meta.title}</title>
+  <meta name="description" content={meta.description} />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href={`https://skillmarket.example.com/${isEn ? 'en' : 'zh'}`} />
+  <meta property="og:title" content={meta.title} />
+  <meta property="og:description" content={meta.og} />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content={isEn ? 'en_US' : 'zh_CN'} />
+  <link rel="alternate" hreflang="zh" href="https://skillmarket.example.com/zh" />
+  <link rel="alternate" hreflang="en" href="https://skillmarket.example.com/en" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased font-sans">
+  <NavBar locale={locale} />
+
+  <div class="pt-20 sm:pt-24">
+    <!-- Search -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
+      <div class="max-w-md mx-auto sm:mx-0">
+        <div class="relative">
+          <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+            <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <input
+            id="search-input"
+            type="text"
+            placeholder={isEn ? 'Search skills...' : '搜索你感兴趣的技能...'}
+            class="w-full pl-12 pr-10 py-3 bg-white/80 border border-slate-200/80 rounded-2xl text-sm text-slate-700 placeholder-slate-400 shadow-sm backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-400/40 focus:border-blue-300 transition-all duration-300"
+          />
+          <button
+            id="search-clear"
+            class="absolute inset-y-0 right-3 flex items-center text-slate-300 hover:text-slate-500 transition-colors hidden"
+            title={isEn ? 'Clear' : '清除'}
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <CategoryNav categories={categories} locale={locale} />
+  </div>
+
+  <section class="pb-16 sm:pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h2 id="category-title" class="text-2xl sm:text-3xl font-bold text-slate-800">{filterLabels.all}</h2>
+          <p id="category-count" class="text-sm text-slate-400 mt-1">{isEn ? `Total ${skills.length} skills` : `共 ${skills.length} 个技能`}</p>
+        </div>
+      </div>
+
+      <div id="skills-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+        {skills.map((skill, i) => (
+          <div
+            data-category={skill.category}
+            data-name={skill.name.toLowerCase()}
+            data-desc={skill.description.toLowerCase()}
+            class="animate-fade-in"
+            style={`animation-delay:${(i % 8) * 0.06}s`}
+          >
+            <SkillCard skill={skill} locale={locale} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <FooterSection categories={categories} locale={locale} />
+</body>
+</html>
+
+<script>
+  const isEn = document.documentElement.lang === 'en';
+  const labels = isEn ? {
+    all: 'All Skills', courses: 'skills',
+    ai: 'AI / LLM Skills', programming: 'Programming Skills', design: 'UI/UX Design Skills',
+    writing: 'Content Creation Skills', marketing: 'Marketing Skills', management: 'Management Skills',
+    data: 'Data Analysis Skills', language: 'Language Learning Skills', growth: 'Personal Growth Skills',
+  } : {
+    all: '全部技能', courses: '个技能',
+    ai: 'AI / 大模型 技能', programming: '编程开发 技能', design: 'UI/UX 设计 技能',
+    writing: '内容创作 技能', marketing: '市场营销 技能', management: '管理 技能',
+    data: '数据分析 技能', language: '语言学习 技能', growth: '个人成长 技能',
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('[data-filter]');
+    const cards = document.querySelectorAll('[data-category]');
+    const titleEl = document.getElementById('category-title');
+    const countEl = document.getElementById('category-count');
+    const searchInput = document.getElementById('search-input');
+    const searchClear = document.getElementById('search-clear');
+
+    const activeClasses = ['bg-gradient-to-r', 'from-blue-600', 'to-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-200/40', 'scale-105'];
+    const inactiveClasses = ['bg-white', 'text-slate-600', 'border', 'border-slate-200/70'];
+
+    let currentCategory = 'all';
+    let searchTerm = '';
+
+    function setActive(btn) {
+      buttons.forEach(b => {
+        b.classList.remove(...activeClasses);
+        b.classList.add(...inactiveClasses);
+      });
+      btn.classList.remove(...inactiveClasses);
+      btn.classList.add(...activeClasses);
+    }
+
+    function updateDisplay() {
+      let count = 0;
+      cards.forEach(card => {
+        const catMatch = currentCategory === 'all' || card.dataset.category === currentCategory;
+        const nameMatch = !searchTerm || card.dataset.name.includes(searchTerm) || card.dataset.desc.includes(searchTerm);
+        const visible = catMatch && nameMatch;
+        card.classList.toggle('hidden', !visible);
+        if (visible) count++;
+      });
+      countEl.textContent = isEn ? `Total ${count} skills` : `共 ${count} 个技能`;
+    }
+
+    function filter(cat) {
+      currentCategory = cat;
+      titleEl.textContent = labels[cat] || labels.all;
+      updateDisplay();
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        setActive(btn);
+        filter(btn.dataset.filter);
+      });
+    });
+
+    // Search
+    searchInput.addEventListener('input', () => {
+      searchTerm = searchInput.value.toLowerCase().trim();
+      searchClear.classList.toggle('hidden', !searchTerm);
+      updateDisplay();
+    });
+
+    searchClear.addEventListener('click', () => {
+      searchInput.value = '';
+      searchTerm = '';
+      searchClear.classList.add('hidden');
+      updateDisplay();
+      searchInput.focus();
+    });
+  });
+</script>
+
+<style>
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
