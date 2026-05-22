@@ -1,0 +1,32 @@
+<nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent" id="navbar">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 sm:h-20">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-lg font-bold shadow-lg shadow-indigo-200">S</div>
+        <span class="text-xl font-bold gradient-text hidden sm:block">SkillMarket</span>
+      </div>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#" class="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors">发现技能</a>
+        <a href="#" class="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors">关于我们</a>
+      </div>
+      <button class="px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full hover:shadow-lg hover:shadow-indigo-200/50 transition-all duration-300 hover:scale-105 active:scale-95">
+        开始探索
+      </button>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        navbar.classList.toggle('glass-nav', window.scrollY > 20);
+        navbar.classList.toggle('shadow-sm', window.scrollY > 20);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+</script>

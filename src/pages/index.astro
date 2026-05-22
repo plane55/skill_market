@@ -1,0 +1,125 @@
+---
+import '../styles/global.css'
+import NavBar from '../components/NavBar.astro'
+import HeroSection from '../components/HeroSection.astro'
+import CategoryNav from '../components/CategoryNav.astro'
+import SkillCard from '../components/SkillCard.astro'
+import FooterSection from '../components/FooterSection.astro'
+import { skills, categories } from '../data/skills'
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillMarket — 发现属于你的下一个技能</title>
+  <meta name="description" content="SkillMarket 汇聚 AI/大模型、编程开发、UI/UX 设计、内容创作、市场营销等各领域精品技能课程。发现属于你的下一个技能，快速进阶。" />
+  <meta name="keywords" content="技能学习,在线课程,AI教程,编程学习,设计课程,自我提升,职业技能,SkillMarket" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://skillmarket.example.com" />
+  <meta property="og:title" content="SkillMarket — 发现属于你的下一个技能" />
+  <meta property="og:description" content="汇聚各领域专家的实战技能课程，助你快速进阶。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="SkillMarket" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SkillMarket — 发现属于你的下一个技能" />
+  <meta name="twitter:description" content="汇聚各领域专家的实战技能课程，助你快速进阶。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased font-sans">
+  <NavBar />
+  <HeroSection />
+  <CategoryNav categories={categories} />
+
+  <section class="pb-16 sm:pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h2 id="category-title" class="text-2xl sm:text-3xl font-bold text-slate-800">全部技能</h2>
+          <p id="category-count" class="text-sm text-slate-400 mt-1">共 {skills.length} 个课程</p>
+        </div>
+      </div>
+
+      <div id="skills-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+        {skills.map((skill, i) => (
+          <div
+            data-category={skill.category}
+            class="animate-fade-in"
+            style={`animation-delay:${(i % 8) * 0.06}s`}
+          >
+            <SkillCard skill={skill} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <FooterSection categories={categories} />
+</body>
+</html>
+
+<script>
+const categoryNames = {
+  all: '全部技能',
+  ai: 'AI / 大模型 技能',
+  programming: '编程开发 技能',
+  design: 'UI/UX 设计 技能',
+  writing: '内容创作 技能',
+  marketing: '市场营销 技能',
+  management: '管理 技能',
+  data: '数据分析 技能',
+  language: '语言学习 技能',
+  growth: '个人成长 技能',
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  const buttons = document.querySelectorAll('[data-filter]');
+  const cards = document.querySelectorAll('[data-category]');
+  const titleEl = document.getElementById('category-title');
+  const countEl = document.getElementById('category-count');
+
+  const activeClasses = ['bg-gradient-to-r', 'from-indigo-600', 'to-purple-600', 'text-white', 'shadow-lg', 'shadow-indigo-200/40', 'scale-105'];
+  const inactiveClasses = ['bg-white', 'text-slate-600', 'border', 'border-slate-200/70'];
+
+  function setActive(btn) {
+    buttons.forEach(b => {
+      b.classList.remove(...activeClasses);
+      b.classList.add(...inactiveClasses);
+    });
+    btn.classList.remove(...inactiveClasses);
+    btn.classList.add(...activeClasses);
+  }
+
+  function filter(cat) {
+    let count = 0;
+    cards.forEach(card => {
+      const match = cat === 'all' || card.dataset.category === cat;
+      card.classList.toggle('hidden', !match);
+      if (match) count++;
+    });
+    titleEl.textContent = categoryNames[cat] || '全部技能';
+    countEl.textContent = `共 ${count} 个课程`;
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      setActive(btn);
+      filter(btn.dataset.filter);
+    });
+  });
+});
+</script>
+
+<style>
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
