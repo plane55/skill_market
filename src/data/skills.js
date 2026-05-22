@@ -14,6 +14,7 @@ export const categories = [
 export const skills = [
   {
     id: 1,
+    slug: 'prompt-engineering',
     name: 'Prompt Engineering 精通',
     description: '从基础到高级，掌握精准提示词工程，让 AI 输出始终如一的优质结果。',
     category: 'ai', difficulty: 2,
@@ -23,6 +24,7 @@ export const skills = [
   },
   {
     id: 2,
+    slug: 'ai-workflow-automation',
     name: 'AI 工作流自动化',
     description: '学会用 AI 工具链搭建自动化工作流，将重复工作交给机器，效率提升 10 倍。',
     category: 'ai', difficulty: 3,
@@ -32,8 +34,9 @@ export const skills = [
   },
   {
     id: 3,
+    slug: 'llm-fine-tuning',
     name: 'LLM 微调实战',
-    description: '深入理解大模型微调原理，从数据准备到模型部署部署的全流程实操课程。',
+    description: '深入理解大模型微调原理，从数据准备到模型部署的全流程实操课程。',
     category: 'ai', difficulty: 3,
     rating: 4.8, reviewCount: 124,
     author: { name: '张睿', avatar: '张', color: 'bg-purple-600' },
@@ -41,6 +44,7 @@ export const skills = [
   },
   {
     id: 4,
+    slug: 'react-19-deep-dive',
     name: 'React 19 深度解析',
     description: '全面掌握 React 19 新特性，Server Components、Actions 等核心概念一网打尽。',
     category: 'programming', difficulty: 2,
@@ -50,6 +54,7 @@ export const skills = [
   },
   {
     id: 5,
+    slug: 'rust-system-programming',
     name: 'Rust 系统编程',
     description: '从所有权系统到并发编程，系统性掌握 Rust 语言核心能力，写出安全高效的代码。',
     category: 'programming', difficulty: 3,
@@ -59,6 +64,7 @@ export const skills = [
   },
   {
     id: 6,
+    slug: 'go-microservices',
     name: 'Go 微服务架构',
     description: '基于 Go 语言构建高可用微服务系统，涵盖 gRPC、消息队列、可观测性等关键技术。',
     category: 'programming', difficulty: 2,
@@ -68,6 +74,7 @@ export const skills = [
   },
   {
     id: 7,
+    slug: 'python-data-science',
     name: 'Python 数据科学',
     description: '用 Python 实现完整数据分析流程：从数据清洗到可视化，快速入门数据科学。',
     category: 'programming', difficulty: 1,
@@ -77,6 +84,7 @@ export const skills = [
   },
   {
     id: 8,
+    slug: 'figma-advanced',
     name: 'Figma 高级技法',
     description: '掌握 Figma 组件体系、自动布局和设计令牌，打造可规模化的产品设计系统。',
     category: 'design', difficulty: 2,
@@ -86,6 +94,7 @@ export const skills = [
   },
   {
     id: 9,
+    slug: 'motion-design',
     name: '动效设计原理与实践',
     description: '学会运用时间和空间来创造流畅、有意义的界面动效体验，提升产品质感。',
     category: 'design', difficulty: 2,
@@ -95,6 +104,7 @@ export const skills = [
   },
   {
     id: 10,
+    slug: 'ux-research-methods',
     name: 'UX 研究方法论',
     description: '系统学习用户研究方法，从用户访谈到可用性测试，用科学方法指导设计决策。',
     category: 'design', difficulty: 1,
@@ -104,6 +114,7 @@ export const skills = [
   },
   {
     id: 11,
+    slug: 'technical-writing',
     name: '技术写作指南',
     description: '学会写出清晰、准确的技术文档，从 API 文档到教程的全方位写作技能训练。',
     category: 'writing', difficulty: 1,
@@ -113,6 +124,7 @@ export const skills = [
   },
   {
     id: 12,
+    slug: 'conversion-copywriting',
     name: '高转化文案写作',
     description: '掌握驱动用户行动的文案技巧，从标题到转化点，用文字带来实际增长。',
     category: 'writing', difficulty: 2,
@@ -122,6 +134,7 @@ export const skills = [
   },
   {
     id: 13,
+    slug: 'storytelling',
     name: '故事力训练营',
     description: '用故事思维重塑表达方式，让内容更有感染力和影响力，打动你的每一位听众。',
     category: 'writing', difficulty: 1,
@@ -131,6 +144,7 @@ export const skills = [
   },
   {
     id: 14,
+    slug: 'growth-hacking',
     name: '增长黑客实战',
     description: '用数据驱动的方法论实现产品和用户增长的持续突破，掌握可复用的增长框架。',
     category: 'marketing', difficulty: 2,
@@ -140,6 +154,7 @@ export const skills = [
   },
   {
     id: 15,
+    slug: 'seo-optimization',
     name: 'SEO 全栈优化',
     description: '从技术 SEO 到内容策略，全面提升搜索引擎可见度，获取高质量的有机流量。',
     category: 'marketing', difficulty: 2,
@@ -149,6 +164,7 @@ export const skills = [
   },
   {
     id: 16,
+    slug: 'social-media-strategy',
     name: '社交媒体策略',
     description: '构建品牌社交媒体矩阵，从内容规划到数据分析，系统化运营你的社媒账号。',
     category: 'marketing', difficulty: 1,
@@ -158,6 +174,7 @@ export const skills = [
   },
   {
     id: 17,
+    slug: 'remote-team-leadership',
     name: '远程团队领导力',
     description: '掌握分布式团队管理方法论，打造高信任、高效率的远程协作文化。',
     category: 'management', difficulty: 2,
@@ -167,6 +184,7 @@ export const skills = [
   },
   {
     id: 18,
+    slug: 'product-strategy',
     name: '产品战略与规划',
     description: '从市场分析到路线图制定，系统掌握产品战略的核心框架与实战工具。',
     category: 'management', difficulty: 3,
@@ -176,6 +194,7 @@ export const skills = [
   },
   {
     id: 19,
+    slug: 'sql-data-analysis',
     name: 'SQL 数据分析大师',
     description: '从基础查询到窗口函数，彻底掌握用 SQL 进行数据分析的核心技能。',
     category: 'data', difficulty: 1,
@@ -185,6 +204,7 @@ export const skills = [
   },
   {
     id: 20,
+    slug: 'bi-dashboard',
     name: '商业智能仪表盘',
     description: '用 Tableau 和 Power BI 构建直观 BI 仪表盘，让数据讲述商业故事。',
     category: 'data', difficulty: 2,
@@ -194,6 +214,7 @@ export const skills = [
   },
   {
     id: 21,
+    slug: 'business-english',
     name: '商务英语实战',
     description: '针对职场场景的高效商务英语训练，涵盖邮件、会议、谈判等核心场景。',
     category: 'language', difficulty: 1,
@@ -203,6 +224,7 @@ export const skills = [
   },
   {
     id: 22,
+    slug: 'japanese-n2',
     name: '日语从零到 N2',
     description: '系统性日语学习路径，从五十音图到 N2 能力考的完整通关方案。',
     category: 'language', difficulty: 1,
@@ -212,6 +234,7 @@ export const skills = [
   },
   {
     id: 23,
+    slug: 'time-management',
     name: '高效时间管理',
     description: '用 GTD 和番茄工作法重构你的时间管理系统，彻底告别低效忙碌。',
     category: 'growth', difficulty: 1,
@@ -221,6 +244,7 @@ export const skills = [
   },
   {
     id: 24,
+    slug: 'public-speaking',
     name: '公众演讲艺术',
     description: '克服演讲焦虑，学会用结构和故事打造有影响力的演讲，自信表达你的观点。',
     category: 'growth', difficulty: 1,

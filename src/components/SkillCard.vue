@@ -29,8 +29,9 @@ const difficultyMap = {
 </script>
 
 <template>
-  <div
-    class="group glass rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-slate-200/60 cursor-pointer"
+  <a
+    :href="`/skills/${skill.slug}`"
+    class="block group glass rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-slate-200/60 cursor-pointer"
   >
     <!-- Featured badge -->
     <div v-if="skill.featured" class="flex items-center justify-between mb-3">
@@ -93,5 +94,5 @@ const difficultyMap = {
         <span>{{ skill.enrolledCount >= 1000 ? (skill.enrolledCount / 1000).toFixed(1) + 'k' : skill.enrolledCount }}</span>
       </div>
     </div>
-  </div>
+  </a>
 </template>

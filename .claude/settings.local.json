@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"e:/webproject/skill_market\" show 9b368d4 --stat)",
+      "Bash(git -C \"e:/webproject/skill_market\" diff 8d7e981..759091a --stat)",
+      "Bash(npm run *)"
+    ]
+  }
+}
