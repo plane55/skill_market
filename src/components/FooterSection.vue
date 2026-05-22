@@ -22,7 +22,6 @@ import { categories } from '../data/skills'
           <h4 class="text-sm font-semibold text-white mb-4">快速链接</h4>
           <ul class="space-y-2.5">
             <li><a href="#" class="text-sm hover:text-indigo-400 transition-colors">发现技能</a></li>
-            <li><a href="#" class="text-sm hover:text-indigo-400 transition-colors">成为导师</a></li>
             <li><a href="#" class="text-sm hover:text-indigo-400 transition-colors">关于我们</a></li>
             <li><a href="#" class="text-sm hover:text-indigo-400 transition-colors">帮助中心</a></li>
           </ul>
@@ -38,16 +37,6 @@ import { categories } from '../data/skills'
           </ul>
         </div>
 
-        <!-- Contact -->
-        <div>
-          <h4 class="text-sm font-semibold text-white mb-4">关注我们</h4>
-          <ul class="space-y-2.5">
-            <li><a href="#" class="text-sm hover:text-indigo-400 transition-colors">微信公众号</a></li>
-            <li><a href="#" class="text-sm hover:text-indigo-400 transition-colors">微博</a></li>
-            <li><a href="#" class="text-sm hover:text-indigo-400 transition-colors">知乎专栏</a></li>
-            <li><a href="#" class="text-sm hover:text-indigo-400 transition-colors">B 站频道</a></li>
-          </ul>
-        </div>
       </div>
     </div>
 

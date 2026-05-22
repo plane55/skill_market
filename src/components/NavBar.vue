@@ -36,7 +36,6 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
         <!-- Nav Links -->
         <div class="hidden md:flex items-center gap-8">
           <a href="#" class="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors">发现技能</a>
-          <a href="#" class="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors">成为导师</a>
           <a href="#" class="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors">关于我们</a>
         </div>
 

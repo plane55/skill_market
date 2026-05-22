@@ -2,7 +2,7 @@
 const stats = [
   { label: '技能总数', value: '1,280+' },
   { label: '在学学员', value: '50,000+' },
-  { label: '认证导师', value: '860+' },
+  { label: '技能分类', value: '9 大类' },
   { label: '课程好评率', value: '98%' },
 ]
 </script>
@@ -60,7 +60,7 @@ const stats = [
             <span class="inline-block ml-1.5">→</span>
           </button>
           <button class="px-7 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-semibold text-slate-600 bg-white/80 border border-slate-200/80 rounded-full hover:border-indigo-200 hover:text-indigo-600 hover:shadow-md transition-all duration-300 backdrop-blur-sm">
-            成为导师
+            了解更多
           </button>
         </div>
       </div>
