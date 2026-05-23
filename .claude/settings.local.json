@@ -12,7 +12,8 @@
       "Bash(sed -i 's/from-blue-600 to-blue-600/from-blue-600 to-blue-800/g' src/components/CategoryNav.astro)",
       "Bash(sed -i 's/from-blue-600 to-blue-600/from-blue-600 to-blue-800/g' src/components/NavBar.astro)",
       "Bash(sed -i 's/from-blue-500 to-blue-600/from-blue-500 to-blue-700/g' src/components/NavBar.astro)",
-      "Bash(sed -i 's/from-blue-500 to-blue-600/from-blue-500 to-blue-700/g' src/components/FooterSection.astro)"
+      "Bash(sed -i 's/from-blue-500 to-blue-600/from-blue-500 to-blue-700/g' src/components/FooterSection.astro)",
+      "Bash(npm install *)"
     ],
     "additionalDirectories": [
       "e:\\webproject\\skill_market\\src\\pages\\[locale\\]",
