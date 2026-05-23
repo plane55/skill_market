@@ -2,16 +2,29 @@
 const { locale = 'zh' } = Astro.props
 const isEn = locale === 'en'
 const brand = isEn ? 'SkillMarket' : 'Skill市场'
+const prefix = `${import.meta.env.BASE_URL}/${locale}`
+
+const typeLinks = [
+  { id: 'skills', label: isEn ? 'Skills' : '技能' },
+  { id: 'agents', label: isEn ? 'Agents' : '智能体' },
+  { id: 'plugins', label: isEn ? 'Plugins' : '插件' },
+  { id: 'mcps', label: isEn ? 'MCPs' : 'MCP' },
+]
 ---
 
 <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent" id="navbar">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16 sm:h-20">
-      <a href={`${import.meta.env.BASE_URL}/${locale}`} class="flex items-center gap-2.5">
+      <a href={prefix} class="flex items-center gap-2.5 flex-shrink-0">
         <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-lg font-bold shadow-lg shadow-blue-200">S</div>
         <span class="text-xl font-bold gradient-text hidden sm:block">{brand}</span>
       </a>
-      <div class="flex items-center gap-3 sm:gap-4">
+      <div class="hidden md:flex items-center gap-1">
+        {typeLinks.map(t => (
+          <a href={`${prefix}#${t.id}`} class="px-3 py-2 text-sm font-medium text-slate-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">{t.label}</a>
+        ))}
+      </div>
+      <div class="flex items-center gap-2 sm:gap-3">
         <a
           href={`${import.meta.env.BASE_URL}/${isEn ? 'zh' : 'en'}`}
           class="text-xs sm:text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors px-2 py-1"

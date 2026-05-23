@@ -1,0 +1,166 @@
+---
+import { mcps, getMCPBySlug, getMCPs } from '../../../i18n/mcps'
+
+export function getStaticPaths() {
+  const paths = []
+  for (const locale of ['zh', 'en']) {
+    for (const mcp of mcps) {
+      paths.push({ params: { locale, slug: mcp.slug } })
+    }
+  }
+  return paths
+}
+
+const { locale, slug } = Astro.params
+const mcp = getMCPBySlug(slug, locale)
+const isEn = locale === 'en'
+
+if (!mcp) {
+  return Astro.redirect(`${import.meta.env.BASE_URL}/${locale}`)
+}
+
+const prefix = `${import.meta.env.BASE_URL}/${locale}`
+
+const categoryNames = {
+  'file-system': { zh: '文件系统', en: 'File System' },
+  'database': { zh: '数据库', en: 'Database' },
+  'api': { zh: 'API', en: 'API' },
+  'search': { zh: '搜索', en: 'Search' },
+  'compute': { zh: '计算', en: 'Compute' },
+}
+
+const typeLabels = {
+  stdio: { zh: '本地', en: 'Local' },
+  http: { zh: '网络', en: 'Network' },
+  websocket: { zh: '实时', en: 'Realtime' },
+}
+
+const allMCPs = getMCPs(locale)
+const relatedMCPs = allMCPs.filter(m => m.category === mcp.category && m.slug !== mcp.slug).slice(0, 4)
+
+const catName = categoryNames[mcp.category]?.[locale] || ''
+const typeLabel = typeLabels[mcp.serverType] || { zh: mcp.serverType, en: mcp.serverType }
+const stars = Math.round(mcp.rating)
+
+const t = {
+  home: isEn ? 'Home' : '首页',
+  related: isEn ? 'Related MCPs' : '同类 MCP',
+  viewAll: isEn ? 'View All →' : '查看全部 →',
+  reviews: isEn ? 'reviews' : '评价',
+  protocol: isEn ? 'Protocol' : '协议',
+  serverType: isEn ? 'Server Type' : '服务类型',
+  models: isEn ? 'Compatible Models' : '兼容模型',
+}
+---
+
+<!DOCTYPE html>
+<html lang={isEn ? 'en' : 'zh-CN'}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{mcp.name} — MCP Server</title>
+  <meta name="description" content={mcp.description} />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased font-sans">
+  <nav class="fixed top-0 left-0 right-0 z-50 glass-nav shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        <a href={prefix} class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-lg font-bold shadow-lg shadow-blue-200">S</div>
+          <span class="text-xl font-bold gradient-text hidden sm:block">SkillMarket</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="pt-24 sm:pt-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="flex items-center gap-2 text-sm text-slate-400 mb-8">
+        <a href={prefix} class="hover:text-blue-600 transition-colors">{t.home}</a>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        <span class="text-slate-600">{mcp.name}</span>
+      </nav>
+    </div>
+  </div>
+
+  <section class="relative pb-16 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+        <div class="flex-1">
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-800 mb-4">{mcp.name}</h1>
+          <p class="text-lg text-slate-500 leading-relaxed mb-6 max-w-2xl">{mcp.description}</p>
+
+          <div class="flex items-center gap-3 mb-8 flex-wrap">
+            <span class="px-3 py-1 text-sm font-medium rounded-full bg-cyan-100 text-cyan-700">{catName}</span>
+            <span class="px-3 py-1 text-sm font-medium rounded-full bg-slate-100 text-slate-600">{typeLabel[locale]}</span>
+          </div>
+
+          <div class="flex items-center gap-6 mb-8 flex-wrap">
+            <div class="flex items-center gap-1.5">
+              <div class="flex items-center">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <svg class={`w-4 h-4 ${i < stars ? 'text-amber-400' : 'text-slate-200'}`} viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                ))}
+              </div>
+              <span class="text-lg font-bold text-slate-700">{mcp.rating}</span>
+              <span class="text-sm text-slate-400">({mcp.reviewCount} {t.reviews})</span>
+            </div>
+          </div>
+
+          <div class="glass rounded-2xl p-5 sm:p-6 space-y-4">
+            <div>
+              <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2">{t.protocol}</h3>
+              <span class="px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-100 rounded-lg">{mcp.protocolVersion}</span>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2">{t.models}</h3>
+              <div class="flex flex-wrap gap-2">
+                {mcp.modelCompatibility.map(m => (
+                  <span class="px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-100 rounded-lg">{m}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {relatedMCPs.length > 0 ? (
+    <section class="py-12 sm:py-16 bg-white/50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-800">{t.related}</h2>
+          <a href={prefix} class="text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors">{t.viewAll}</a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+          {relatedMCPs.map(m => (
+            <a href={`${prefix}/mcps/${m.slug}`} class="block group glass rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl">
+              <h3 class="text-base font-semibold text-slate-800 mb-2 group-hover:text-blue-600 line-clamp-1">{m.name}</h3>
+              <p class="text-sm text-slate-500 line-clamp-2 mb-4">{m.description}</p>
+              <span class="px-2.5 py-0.5 text-xs font-medium rounded-full bg-cyan-100 text-cyan-700">{categoryNames[m.category]?.[locale] || ''}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  ) : null}
+
+  <footer class="border-t border-slate-200/60 bg-white/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <p class="text-center text-sm text-slate-400">&copy; 2026 SkillMarket. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
+
+<style>
+  .gradient-text { background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-image: linear-gradient(to right, #4f46e5, #9333ea); }
+  .glass { background: rgba(255,255,255,0.75); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.18); }
+  .glass-nav { background: rgba(255,255,255,0.85); backdrop-filter: blur(24px); border-bottom: 1px solid rgba(226,232,240,0.6); }
+</style>

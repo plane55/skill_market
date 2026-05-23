@@ -2,9 +2,16 @@
 import '../../styles/global.css'
 import NavBar from '../../components/NavBar.astro'
 import CategoryNav from '../../components/CategoryNav.astro'
+import TypeTabs from '../../components/TypeTabs.astro'
 import SkillCard from '../../components/SkillCard.astro'
+import AgentCard from '../../components/AgentCard.astro'
+import PluginCard from '../../components/PluginCard.astro'
+import MCPCard from '../../components/MCPCard.astro'
 import FooterSection from '../../components/FooterSection.astro'
 import { getSkills } from '../../i18n/skills'
+import { getAgents } from '../../i18n/agents'
+import { getPlugins } from '../../i18n/plugins'
+import { getMCPs } from '../../i18n/mcps'
 import { getCategories } from '../../i18n/ui'
 
 export function getStaticPaths() {
@@ -16,17 +23,20 @@ export function getStaticPaths() {
 
 const { locale } = Astro.params
 const skills = getSkills(locale)
+const agents = getAgents(locale)
+const plugins = getPlugins(locale)
+const mcps = getMCPs(locale)
 const categories = getCategories(locale)
 const isEn = locale === 'en'
 
 const meta = {
-  title: isEn ? 'SkillMarket — Discover Your Next Skill' : 'Skill市场 — 发现属于你的下一个技能',
+  title: isEn ? 'SkillMarket — AI Skills, Agents, Plugins & MCPs' : 'Skill市场 — AI 技能、智能体、插件与 MCP 聚合平台',
   description: isEn
-    ? 'SkillMarket brings together premium skills across AI/LLM, programming, design, marketing, and more.'
-    : 'Skill市场 汇聚 AI/大模型、编程开发、UI/UX 设计、内容创作、市场营销等各领域精品技能。',
+    ? 'Discover AI skills, agents, plugins, and MCPs all in one place.'
+    : '发现 AI 技能、智能体、插件与 MCP 工具一站式聚合平台。',
   og: isEn
-    ? 'Premium skills from industry experts to accelerate your career growth.'
-    : '汇聚各领域专家的实战技能，助你快速进阶。',
+    ? 'Your one-stop platform for AI capabilities.'
+    : '你的一站式 AI 能力聚合平台。',
 }
 
 const filterLabels = isEn ? {
@@ -68,7 +78,6 @@ const filterLabels = isEn ? {
   <NavBar locale={locale} />
 
   <div class="pt-20 sm:pt-24">
-    <!-- Search -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
       <div class="max-w-md mx-auto sm:mx-0">
         <div class="relative">
@@ -80,7 +89,7 @@ const filterLabels = isEn ? {
           <input
             id="search-input"
             type="text"
-            placeholder={isEn ? 'Search skills...' : '搜索你感兴趣的技能...'}
+            placeholder={isEn ? 'Search skills, agents, plugins...' : '搜索技能、智能体、插件...'}
             class="w-full pl-12 pr-10 py-3 bg-white/80 border border-slate-200/80 rounded-2xl text-sm text-slate-700 placeholder-slate-400 shadow-sm backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-400/40 focus:border-blue-300 transition-all duration-300"
           />
           <button
@@ -96,11 +105,14 @@ const filterLabels = isEn ? {
       </div>
     </div>
 
-    <CategoryNav categories={categories} locale={locale} />
   </div>
 
-  <section class="pb-16 sm:pb-20">
+  <section id="skills" class="pb-16 sm:pb-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <TypeTabs locale={locale} />
+
+      <CategoryNav categories={categories} locale={locale} />
+
       <div class="flex items-center justify-between mb-8">
         <div>
           <h2 id="category-title" class="text-2xl sm:text-3xl font-bold text-slate-800">{filterLabels.all}</h2>
@@ -109,15 +121,52 @@ const filterLabels = isEn ? {
       </div>
 
       <div id="skills-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-        {skills.map((skill, i) => (
+        {skills.map((item, i) => (
           <div
-            data-category={skill.category}
-            data-name={skill.name.toLowerCase()}
-            data-desc={skill.description.toLowerCase()}
+            data-type="skills"
+            data-category={item.category}
+            data-name={item.name.toLowerCase()}
+            data-desc={item.description.toLowerCase()}
             class="animate-fade-in"
             style={`animation-delay:${(i % 8) * 0.06}s`}
           >
-            <SkillCard skill={skill} locale={locale} />
+            <SkillCard skill={item} locale={locale} />
+          </div>
+        ))}
+        {agents.map((item, i) => (
+          <div
+            data-type="agents"
+            data-category={item.category}
+            data-name={item.name.toLowerCase()}
+            data-desc={item.description.toLowerCase()}
+            class="animate-fade-in hidden"
+            style={`animation-delay:${(i % 8) * 0.06}s`}
+          >
+            <AgentCard agent={item} locale={locale} />
+          </div>
+        ))}
+        {plugins.map((item, i) => (
+          <div
+            data-type="plugins"
+            data-category={item.category}
+            data-name={item.name.toLowerCase()}
+            data-desc={item.description.toLowerCase()}
+            class="animate-fade-in hidden"
+            style={`animation-delay:${(i % 8) * 0.06}s`}
+          >
+            <PluginCard plugin={item} locale={locale} />
+          </div>
+        ))}
+        {mcps.map((item, i) => (
+          <div
+            data-type="mcps"
+            data-category={item.category}
+            data-name={item.name.toLowerCase()}
+            data-desc={item.description.toLowerCase()}
+            class="animate-fade-in hidden"
+            style={`animation-delay:${(i % 8) * 0.06}s`}
+          >
+            <MCPCard mcp={item} locale={locale} />
           </div>
         ))}
       </div>
@@ -130,6 +179,12 @@ const filterLabels = isEn ? {
 
 <script>
   const isEn = document.documentElement.lang === 'en';
+  const typeAllLabels = isEn
+    ? { skills: 'All Skills', agents: 'All Agents', plugins: 'All Plugins', mcps: 'All MCPs' }
+    : { skills: '全部技能', agents: '全部智能体', plugins: '全部插件', mcps: '全部 MCP' };
+  const typeUnitLabels = isEn
+    ? { skills: 'skills', agents: 'agents', plugins: 'plugins', mcps: 'MCPs' }
+    : { skills: '个技能', agents: '个智能体', plugins: '个插件', mcps: '个 MCP' };
   const labels = isEn ? {
     all: 'All Skills', courses: 'skills',
     ai: 'AI / LLM Skills', programming: 'Programming Skills', design: 'UI/UX Design Skills',
@@ -143,41 +198,102 @@ const filterLabels = isEn ? {
   };
 
   document.addEventListener('DOMContentLoaded', () => {
+    const typeTabs = document.querySelectorAll('[data-type-tab]');
     const buttons = document.querySelectorAll('[data-filter]');
-    const cards = document.querySelectorAll('[data-category]');
+    const items = document.querySelectorAll('[data-type]');
     const titleEl = document.getElementById('category-title');
     const countEl = document.getElementById('category-count');
     const searchInput = document.getElementById('search-input');
     const searchClear = document.getElementById('search-clear');
 
-    const activeClasses = ['bg-gradient-to-r', 'from-blue-600', 'to-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-200/40', 'scale-105'];
-    const inactiveClasses = ['bg-white', 'text-slate-600', 'border', 'border-slate-200/70'];
+    const activeCls = ['bg-gradient-to-r', 'from-blue-600', 'to-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-200/40', 'scale-105'];
+    const inactiveCls = ['bg-white', 'text-slate-600', 'border', 'border-slate-200/70'];
 
+    let currentType = 'skills';
     let currentCategory = 'all';
     let searchTerm = '';
 
-    function setActive(btn) {
-      buttons.forEach(b => {
-        b.classList.remove(...activeClasses);
-        b.classList.add(...inactiveClasses);
-      });
-      btn.classList.remove(...inactiveClasses);
-      btn.classList.add(...activeClasses);
+    function countByType() {
+      return Array.from(items).filter(el => el.dataset.type === currentType).length;
+    }
+
+    function countVisible() {
+      return Array.from(items).filter(el => !el.classList.contains('hidden')).length;
     }
 
     function updateDisplay() {
-      let count = 0;
-      cards.forEach(card => {
-        const catMatch = currentCategory === 'all' || card.dataset.category === currentCategory;
-        const nameMatch = !searchTerm || card.dataset.name.includes(searchTerm) || card.dataset.desc.includes(searchTerm);
-        const visible = catMatch && nameMatch;
-        card.classList.toggle('hidden', !visible);
-        if (visible) count++;
+      items.forEach(item => {
+        const typeMatch = item.dataset.type === currentType;
+        const catMatch = currentCategory === 'all' || item.dataset.category === currentCategory;
+        const nameMatch = !searchTerm || item.dataset.name.includes(searchTerm) || item.dataset.desc.includes(searchTerm);
+        item.classList.toggle('hidden', !(typeMatch && catMatch && nameMatch));
       });
-      countEl.textContent = isEn ? `Total ${count} skills` : `共 ${count} 个技能`;
+      countEl.textContent = isEn ? `Total ${countVisible()} ${typeUnitLabels[currentType]}` : `共 ${countVisible()} ${typeUnitLabels[currentType]}`;
     }
 
-    function filter(cat) {
+    // Handle hash links (from NavBar)
+    function handleHash() {
+      const hash = window.location.hash.replace('#', '');
+      if (['skills', 'agents', 'plugins', 'mcps'].includes(hash)) {
+        switchType(hash);
+      }
+    }
+    window.addEventListener('hashchange', handleHash);
+    if (window.location.hash) handleHash();
+
+    // Type tabs
+    function switchType(type) {
+      currentType = type;
+      currentCategory = 'all';
+      searchTerm = '';
+
+      typeTabs.forEach(tab => {
+        const active = tab.dataset.typeTab === type;
+        if (active) {
+          tab.classList.add('bg-gradient-to-r', 'from-blue-600', 'to-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-200/40', 'scale-105');
+          tab.classList.remove(...inactiveCls);
+        } else {
+          tab.classList.remove('bg-gradient-to-r', 'from-blue-600', 'to-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-200/40', 'scale-105');
+          tab.classList.add(...inactiveCls);
+        }
+      });
+
+      buttons.forEach(btn => {
+        const isAll = btn.dataset.filter === 'all';
+        if (isAll) {
+          btn.classList.add(...activeCls);
+          btn.classList.remove(...inactiveCls);
+        } else {
+          btn.classList.remove(...activeCls);
+          btn.classList.add(...inactiveCls);
+        }
+      });
+
+      // Reset search input
+      if (searchInput) searchInput.value = '';
+      searchClear?.classList.add('hidden');
+
+      titleEl.textContent = typeAllLabels[type] || labels.all;
+      const total = countByType();
+      countEl.textContent = isEn ? `Total ${total} ${typeUnitLabels[type]}` : `共 ${total} ${typeUnitLabels[type]}`;
+      updateDisplay();
+    }
+
+    typeTabs.forEach(tab => {
+      tab.addEventListener('click', () => switchType(tab.dataset.typeTab));
+    });
+
+    // Category filter
+    function setActive(btn) {
+      buttons.forEach(b => {
+        b.classList.remove(...activeCls);
+        b.classList.add(...inactiveCls);
+      });
+      btn.classList.remove(...inactiveCls);
+      btn.classList.add(...activeCls);
+    }
+
+    function filterByCategory(cat) {
       currentCategory = cat;
       titleEl.textContent = labels[cat] || labels.all;
       updateDisplay();
@@ -185,8 +301,9 @@ const filterLabels = isEn ? {
 
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
+        // Only apply if the active type is skills (category labels are skill-specific)
         setActive(btn);
-        filter(btn.dataset.filter);
+        filterByCategory(btn.dataset.filter);
       });
     });
 
@@ -204,6 +321,13 @@ const filterLabels = isEn ? {
       updateDisplay();
       searchInput.focus();
     });
+
+    // Init: activate first type tab
+    const firstTab = typeTabs[0];
+    if (firstTab) {
+      firstTab.classList.add('bg-gradient-to-r', 'from-blue-600', 'to-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-200/40', 'scale-105');
+      firstTab.classList.remove(...inactiveCls);
+    }
   });
 </script>
 

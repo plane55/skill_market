@@ -1,0 +1,22 @@
+---
+const { locale = 'zh' } = Astro.props
+const isEn = locale === 'en'
+
+const types = [
+  { id: 'skills', label: isEn ? 'Skills' : '技能' },
+  { id: 'agents', label: isEn ? 'Agents' : '智能体' },
+  { id: 'plugins', label: isEn ? 'Plugins' : '插件' },
+  { id: 'mcps', label: isEn ? 'MCPs' : 'MCP' },
+]
+---
+
+<div class="flex items-center gap-2 sm:gap-3 mb-6 overflow-x-auto pb-1" id="type-tabs">
+  {types.map(t => (
+    <button
+      data-type-tab={t.id}
+      class="type-tab flex-shrink-0 px-5 py-2.5 text-sm font-medium rounded-xl border transition-all duration-200 bg-white text-slate-600 border-slate-200/70 hover:border-blue-200 hover:text-blue-600"
+    >
+      {t.label}
+    </button>
+  ))}
+</div>

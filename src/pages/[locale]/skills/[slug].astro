@@ -160,12 +160,6 @@ const t = {
               <span class="text-lg font-bold text-slate-700">{skill.rating}</span>
               <span class="text-sm text-slate-400">({skill.reviewCount} {t.reviews})</span>
             </div>
-            <div class="flex items-center gap-1.5 text-slate-500">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
-              <span class="text-sm">{skill.enrolledCount >= 1000 ? (skill.enrolledCount / 1000).toFixed(1) + 'k' : skill.enrolledCount} {t.followers}</span>
-            </div>
           </div>
 
           <div class="glass rounded-2xl p-5 sm:p-6 inline-flex items-center gap-4">
