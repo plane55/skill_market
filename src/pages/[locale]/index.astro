@@ -3,6 +3,7 @@ import '../../styles/global.css'
 import NavBar from '../../components/NavBar.astro'
 import CategoryNav from '../../components/CategoryNav.astro'
 import TypeTabs from '../../components/TypeTabs.astro'
+import Pagination from '../../components/Pagination.astro'
 import SkillCard from '../../components/SkillCard.astro'
 import AgentCard from '../../components/AgentCard.astro'
 import PluginCard from '../../components/PluginCard.astro'
@@ -73,8 +74,11 @@ const filterLabels = isEn ? {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script is:inline>
+    (function(){const t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')})();
+  </script>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased font-sans">
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 antialiased font-sans">
   <NavBar locale={locale} />
 
   <div class="pt-20 sm:pt-24">
@@ -90,7 +94,7 @@ const filterLabels = isEn ? {
             id="search-input"
             type="text"
             placeholder={isEn ? 'Search skills, agents, plugins...' : '搜索技能、智能体、插件...'}
-            class="w-full pl-12 pr-10 py-3 bg-white/80 border border-slate-200/80 rounded-2xl text-sm text-slate-700 placeholder-slate-400 shadow-sm backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-400/40 focus:border-blue-300 transition-all duration-300"
+            class="w-full pl-12 pr-10 py-3 bg-white/80 border border-slate-200/80 rounded-2xl text-sm text-slate-700 placeholder-slate-400 shadow-sm backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-400/40 focus:border-blue-300 dark:bg-slate-800/80 dark:border-slate-600/80 dark:text-slate-200 dark:placeholder-slate-500 transition-all duration-300"
           />
           <button
             id="search-clear"
@@ -115,8 +119,8 @@ const filterLabels = isEn ? {
 
       <div class="flex items-center justify-between mb-8">
         <div>
-          <h2 id="category-title" class="text-2xl sm:text-3xl font-bold text-slate-800">{filterLabels.all}</h2>
-          <p id="category-count" class="text-sm text-slate-400 mt-1">{isEn ? `Total ${skills.length} skills` : `共 ${skills.length} 个技能`}</p>
+          <h2 id="category-title" class="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-slate-100">{filterLabels.all}</h2>
+          <p id="category-count" class="text-sm text-slate-400 mt-1 dark:text-slate-500">{isEn ? `Total ${skills.length} skills` : `共 ${skills.length} 个技能`}</p>
         </div>
       </div>
 
@@ -171,6 +175,8 @@ const filterLabels = isEn ? {
         ))}
       </div>
     </div>
+
+    <Pagination locale={locale} />
   </section>
 
   <FooterSection categories={categories} locale={locale} />
@@ -212,6 +218,8 @@ const filterLabels = isEn ? {
     let currentType = 'skills';
     let currentCategory = 'all';
     let searchTerm = '';
+    let currentPage = 1;
+    const itemsPerPage = 12;
 
     function countByType() {
       return Array.from(items).filter(el => el.dataset.type === currentType).length;
@@ -221,14 +229,91 @@ const filterLabels = isEn ? {
       return Array.from(items).filter(el => !el.classList.contains('hidden')).length;
     }
 
-    function updateDisplay() {
-      items.forEach(item => {
+    function getFilteredItems() {
+      return Array.from(items).filter(item => {
         const typeMatch = item.dataset.type === currentType;
         const catMatch = currentCategory === 'all' || item.dataset.category === currentCategory;
         const nameMatch = !searchTerm || item.dataset.name.includes(searchTerm) || item.dataset.desc.includes(searchTerm);
-        item.classList.toggle('hidden', !(typeMatch && catMatch && nameMatch));
+        return typeMatch && catMatch && nameMatch;
       });
-      countEl.textContent = isEn ? `Total ${countVisible()} ${typeUnitLabels[currentType]}` : `共 ${countVisible()} ${typeUnitLabels[currentType]}`;
+    }
+
+    function showPage(page) {
+      const filtered = getFilteredItems();
+      const totalPages = Math.ceil(filtered.length / itemsPerPage) || 1;
+      const pg = Math.max(1, Math.min(page, totalPages));
+      currentPage = pg;
+
+      // Hide all items first
+      items.forEach(item => item.classList.add('hidden'));
+
+      // Show only items on current page
+      const start = (pg - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      filtered.slice(start, end).forEach(item => item.classList.remove('hidden'));
+
+      // Update pagination UI
+      renderPagination(filtered.length);
+
+      countEl.textContent = isEn
+        ? `Total ${filtered.length} ${typeUnitLabels[currentType]}`
+        : `共 ${filtered.length} ${typeUnitLabels[currentType]}`;
+    }
+
+    function renderPagination(total) {
+      const pagination = document.getElementById('pagination');
+      const pageNumbers = document.getElementById('page-numbers');
+      const prevBtn = document.getElementById('page-prev');
+      const nextBtn = document.getElementById('page-next');
+      if (!pagination) return;
+
+      const totalPages = Math.ceil(total / itemsPerPage) || 1;
+      if (totalPages <= 1) {
+        pagination.classList.add('hidden');
+        return;
+      }
+      pagination.classList.remove('hidden');
+
+      prevBtn.disabled = currentPage <= 1;
+      nextBtn.disabled = currentPage >= totalPages;
+
+      // Build page number buttons
+      pageNumbers.innerHTML = '';
+      const range = [];
+      if (totalPages <= 5) {
+        for (let i = 1; i <= totalPages; i++) range.push(i);
+      } else {
+        range.push(1);
+        if (currentPage > 3) range.push('...');
+        for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) range.push(i);
+        if (currentPage < totalPages - 2) range.push('...');
+        range.push(totalPages);
+      }
+
+      range.forEach(p => {
+        if (p === '...') {
+          const el = document.createElement('span');
+          el.className = 'px-2 py-1 text-sm text-slate-400 dark:text-slate-500';
+          el.textContent = '...';
+          pageNumbers.appendChild(el);
+        } else {
+          const btn = document.createElement('button');
+          btn.dataset.page = p;
+          btn.className = `px-3 py-1.5 text-sm font-medium rounded-lg transition-colors ${
+            p === currentPage
+              ? 'bg-gradient-to-r from-blue-600 to-blue-600 text-white shadow-lg shadow-blue-200/40'
+              : 'text-slate-500 bg-white border border-slate-200/70 hover:text-blue-600 hover:border-blue-300 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-600/70 dark:hover:text-blue-400'
+          }`;
+          btn.textContent = p;
+          btn.addEventListener('click', () => showPage(p));
+          pageNumbers.appendChild(btn);
+        }
+      });
+    }
+
+    function updateDisplay() {
+      currentPage = 1;
+      showPage(1);
     }
 
     // Handle hash links (from NavBar)
@@ -328,6 +413,13 @@ const filterLabels = isEn ? {
       firstTab.classList.add('bg-gradient-to-r', 'from-blue-600', 'to-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-200/40', 'scale-105');
       firstTab.classList.remove(...inactiveCls);
     }
+
+    // Pagination prev/next
+    document.getElementById('page-prev')?.addEventListener('click', () => showPage(currentPage - 1));
+    document.getElementById('page-next')?.addEventListener('click', () => showPage(currentPage + 1));
+
+    // Initial render
+    showPage(1);
   });
 </script>
 

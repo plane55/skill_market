@@ -15,11 +15,19 @@
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.18);
   }
+  .dark .glass {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(51, 65, 85, 0.3);
+  }
   .glass-nav {
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+  }
+  .dark .glass-nav {
+    background: rgba(15, 23, 42, 0.9);
+    border-bottom-color: rgba(51, 65, 85, 0.5);
   }
   .gradient-text {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-800;
